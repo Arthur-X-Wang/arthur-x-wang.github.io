@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Arthur Wang blog</title>
-    <link>http://localhost:1313/posts/</link>
+    <link>https://arthur-x-wang.github.io/posts/</link>
     <description>Recent content in Posts on Arthur Wang blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 26 May 2025 12:00:30 +0000</lastBuildDate><atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 26 May 2025 12:00:30 +0000</lastBuildDate><atom:link href="https://arthur-x-wang.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>如何通过vs code 连接 aws</title>
-      <link>http://localhost:1313/posts/01vscodeconnectaws/</link>
+      <link>https://arthur-x-wang.github.io/posts/01vscodeconnectaws/</link>
       <pubDate>Mon, 26 May 2025 12:00:30 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/01vscodeconnectaws/</guid>
+      <guid>https://arthur-x-wang.github.io/posts/01vscodeconnectaws/</guid>
       
       <description>&lt;h1 id=&#34;前提条件&#34;&gt;前提条件&lt;/h1&gt;
 &lt;ul&gt;
