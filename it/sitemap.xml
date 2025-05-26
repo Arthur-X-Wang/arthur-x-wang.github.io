@@ -2,130 +2,130 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://arthur-x-wang.github.io/it/</loc>
+    <loc>http://localhost:1313/it/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://arthur-x-wang.github.io/zh-cn/"
+                href="http://localhost:1313/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-gb"
-                href="https://arthur-x-wang.github.io/"
+                href="http://localhost:1313/en-gb/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="de-de"
-                href="https://arthur-x-wang.github.io/de-de/"
+                href="http://localhost:1313/de-de/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="fr-fr"
-                href="https://arthur-x-wang.github.io/fr-fr/"
+                href="http://localhost:1313/fr-fr/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ja"
-                href="https://arthur-x-wang.github.io/ja/"
+                href="http://localhost:1313/ja/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="pt-br"
-                href="https://arthur-x-wang.github.io/pt-br/"
+                href="http://localhost:1313/pt-br/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ru-ru"
-                href="https://arthur-x-wang.github.io/ru-ru/"
+                href="http://localhost:1313/ru-ru/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="it"
-                href="https://arthur-x-wang.github.io/it/"
+                href="http://localhost:1313/it/"
                 />
   </url><url>
-    <loc>https://arthur-x-wang.github.io/it/categories/</loc>
+    <loc>http://localhost:1313/it/categories/</loc>
     <xhtml:link
                 rel="alternate"
-                hreflang="en-gb"
-                href="https://arthur-x-wang.github.io/categories/"
+                hreflang="zh-cn"
+                href="http://localhost:1313/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="de-de"
-                href="https://arthur-x-wang.github.io/de-de/categories/"
+                href="http://localhost:1313/de-de/categories/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-gb"
+                href="http://localhost:1313/en-gb/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="fr-fr"
-                href="https://arthur-x-wang.github.io/fr-fr/categories/"
+                href="http://localhost:1313/fr-fr/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ja"
-                href="https://arthur-x-wang.github.io/ja/categories/"
+                href="http://localhost:1313/ja/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="pt-br"
-                href="https://arthur-x-wang.github.io/pt-br/categories/"
+                href="http://localhost:1313/pt-br/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ru-ru"
-                href="https://arthur-x-wang.github.io/ru-ru/categories/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://arthur-x-wang.github.io/zh-cn/categories/"
+                href="http://localhost:1313/ru-ru/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="it"
-                href="https://arthur-x-wang.github.io/it/categories/"
+                href="http://localhost:1313/it/categories/"
                 />
   </url><url>
-    <loc>https://arthur-x-wang.github.io/it/tags/</loc>
+    <loc>http://localhost:1313/it/tags/</loc>
     <xhtml:link
                 rel="alternate"
-                hreflang="en-gb"
-                href="https://arthur-x-wang.github.io/tags/"
+                hreflang="zh-cn"
+                href="http://localhost:1313/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="de-de"
-                href="https://arthur-x-wang.github.io/de-de/tags/"
+                href="http://localhost:1313/de-de/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-gb"
+                href="http://localhost:1313/en-gb/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="fr-fr"
-                href="https://arthur-x-wang.github.io/fr-fr/tags/"
+                href="http://localhost:1313/fr-fr/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ja"
-                href="https://arthur-x-wang.github.io/ja/tags/"
+                href="http://localhost:1313/ja/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="pt-br"
-                href="https://arthur-x-wang.github.io/pt-br/tags/"
+                href="http://localhost:1313/pt-br/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ru-ru"
-                href="https://arthur-x-wang.github.io/ru-ru/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://arthur-x-wang.github.io/zh-cn/tags/"
+                href="http://localhost:1313/ru-ru/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="it"
-                href="https://arthur-x-wang.github.io/it/tags/"
+                href="http://localhost:1313/it/tags/"
                 />
   </url>
 </urlset>
