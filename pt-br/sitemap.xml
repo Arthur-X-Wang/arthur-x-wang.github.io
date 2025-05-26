@@ -2,130 +2,130 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://hba.sid.one/pt-br/</loc>
+    <loc>https://arthur-x-wang.github.io/pt-br/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://arthur-x-wang.github.io/zh-cn/"
+                />
     <xhtml:link
                 rel="alternate"
                 hreflang="en-gb"
-                href="https://hba.sid.one/"
+                href="https://arthur-x-wang.github.io/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="de-de"
-                href="https://hba.sid.one/de-de/"
+                href="https://arthur-x-wang.github.io/de-de/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="fr-fr"
-                href="https://hba.sid.one/fr-fr/"
+                href="https://arthur-x-wang.github.io/fr-fr/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ja"
-                href="https://hba.sid.one/ja/"
+                href="https://arthur-x-wang.github.io/ja/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ru-ru"
-                href="https://hba.sid.one/ru-ru/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://hba.sid.one/zh-cn/"
+                href="https://arthur-x-wang.github.io/ru-ru/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="it"
-                href="https://hba.sid.one/it/"
+                href="https://arthur-x-wang.github.io/it/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="pt-br"
-                href="https://hba.sid.one/pt-br/"
+                href="https://arthur-x-wang.github.io/pt-br/"
                 />
   </url><url>
-    <loc>https://hba.sid.one/pt-br/categories/</loc>
+    <loc>https://arthur-x-wang.github.io/pt-br/categories/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-gb"
-                href="https://hba.sid.one/categories/"
+                href="https://arthur-x-wang.github.io/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="de-de"
-                href="https://hba.sid.one/de-de/categories/"
+                href="https://arthur-x-wang.github.io/de-de/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="fr-fr"
-                href="https://hba.sid.one/fr-fr/categories/"
+                href="https://arthur-x-wang.github.io/fr-fr/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ja"
-                href="https://hba.sid.one/ja/categories/"
+                href="https://arthur-x-wang.github.io/ja/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ru-ru"
-                href="https://hba.sid.one/ru-ru/categories/"
+                href="https://arthur-x-wang.github.io/ru-ru/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://hba.sid.one/zh-cn/categories/"
+                href="https://arthur-x-wang.github.io/zh-cn/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="it"
-                href="https://hba.sid.one/it/categories/"
+                href="https://arthur-x-wang.github.io/it/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="pt-br"
-                href="https://hba.sid.one/pt-br/categories/"
+                href="https://arthur-x-wang.github.io/pt-br/categories/"
                 />
   </url><url>
-    <loc>https://hba.sid.one/pt-br/tags/</loc>
+    <loc>https://arthur-x-wang.github.io/pt-br/tags/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-gb"
-                href="https://hba.sid.one/tags/"
+                href="https://arthur-x-wang.github.io/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="de-de"
-                href="https://hba.sid.one/de-de/tags/"
+                href="https://arthur-x-wang.github.io/de-de/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="fr-fr"
-                href="https://hba.sid.one/fr-fr/tags/"
+                href="https://arthur-x-wang.github.io/fr-fr/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ja"
-                href="https://hba.sid.one/ja/tags/"
+                href="https://arthur-x-wang.github.io/ja/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ru-ru"
-                href="https://hba.sid.one/ru-ru/tags/"
+                href="https://arthur-x-wang.github.io/ru-ru/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://hba.sid.one/zh-cn/tags/"
+                href="https://arthur-x-wang.github.io/zh-cn/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="it"
-                href="https://hba.sid.one/it/tags/"
+                href="https://arthur-x-wang.github.io/it/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="pt-br"
-                href="https://hba.sid.one/pt-br/tags/"
+                href="https://arthur-x-wang.github.io/pt-br/tags/"
                 />
   </url>
 </urlset>
