@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="zh-cn"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">SRE 书籍阅读笔记-告警 | Arthur Wang blog</title>
+<meta property="og:title" content="SRE 书籍阅读笔记-告警 | Arthur Wang blog" />
+<meta name="twitter:title" content="SRE 书籍阅读笔记-告警 | Arthur Wang blog" />
+<meta itemprop="name" content="SRE 书籍阅读笔记-告警 | Arthur Wang blog" />
+<meta name="application-name" content="SRE 书籍阅读笔记-告警 | Arthur Wang blog" />
+<meta property="og:site_name" content="Arthur Wang blog" />
+
+<meta name="description" content="支持亮色和暗色模式的极简 Hugo 博客主题">
+<meta itemprop="description" content="支持亮色和暗色模式的极简 Hugo 博客主题" />
+<meta property="og:description" content="支持亮色和暗色模式的极简 Hugo 博客主题" />
+<meta name="twitter:description" content="支持亮色和暗色模式的极简 Hugo 博客主题" />
+
+<meta property="og:locale" content="zh-cn" />
+<meta name="language" content="zh-cn" />
+
+  <link rel="alternate" hreflang="zh-cn" href="http://localhost:1313/posts/02srebookalert/" title="Chinese" />
+
+
+
+
+
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2025-06-19T13:56:00Z />
+    <meta property="article:published_time" content=2025-06-19T13:56:00Z />
+    <meta property="og:url" content="http://localhost:1313/posts/02srebookalert/" />
+
+    
+    <meta property="og:article:author" content="Arthur Wang" />
+    <meta property="article:author" content="Arthur Wang" />
+    <meta name="author" content="Arthur Wang" />
+    
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "SRE 书籍阅读笔记-告警",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2025-06-19",
+        "description": "",
+        "wordCount":  92 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2025-06-19",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "Arthur Wang blog"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.147.5">
+
+    
+    <meta property="og:url" content="http://localhost:1313/posts/02srebookalert/">
+  <meta property="og:site_name" content="Arthur Wang blog">
+  <meta property="og:title" content="SRE 书籍阅读笔记-告警">
+  <meta property="og:description" content="监控 监控的数据：指标、文本日志、切割日志、链路追踪、事件自省 基本：指标、切割日志 监控的目的：判断服务运行状况、诊断问题 提醒注意 调查诊断 现实系统信息 资源、服务运行状况，进行长期规划 服务更新前后的变化 如何选择监控系统 选择监控需要注意，优先考虑自己所需要的功能，主要包括：速度、计算能力、UI、告警 速度 监控数据应该是实时的，这样在出现问题时能够及时发现。另外，如果数据刷新缓慢，可能导致对系统做了操作，但是指标很久没有变化，导致错误判断。 查询大量数据，数据的检索速度很重要；是用图形绘制图像，也需要加载数据； 为了加快速度，可以传入和存储时许数据；也可以预计算常见的查询结果 计算能力 可能需要保留多个月的数据，分析增长等长期趋势，保留汇总的摘要数据就够了 详细的个人数据用来单独研究，存储成本较高、检索不方便 事件、资源消耗，使用单调递增的计数器。使用计数器可以计算一个时间窗口内的增长率等数据，也可以构建 SLO 告警 统计功能很重要。比如通过百分位延迟数据，可以发现长尾问题。算数平均数时无法得到这些结论的，可能掩盖了不良结果。 还需要具有脱机分析能力。比如每周、每月的报告，或者更复杂的计算。 UI能力 需要能够使用图表简单直观地显示时序数据。 需要选择合适的图形展示数据格式，常见的包括热图、直方图、对数比例图等。 对于不同的受众，使用不同的仪表盘。 对于每组仪表盘，使用相同类型的数据，便于沟通。 可能需要不同指标聚合的图形，比如计算机类型、服务器版本、请求类型等。对不同的指标进行数据切片，寻找数据的相关性和数据模式。 告警 告警需要分类，比如通过告警级别分类。不同的告警级别对应不同的响应方式。可以提交工单持续调查，也有的必须立即介入处理。
+使用告警抑制功能进行告警降噪，避免影响on call人员的注意力。比如
+所有的节点都报错，仅仅针对全局错误率进行告警，而不是每个节点一条。 依赖服务触发了告警，则不要出发服务本身成功率的告警。 还需要在问题解决后，告警不再被抑制。
+现在有大量的开源告警系统。
+监控数据的来源 常见两种监控数据：日志和指标，还有分布式追踪和运行时自省？ 指标表示属性和事件，通常是以固定的时间间隔收集的多个数据点。 日志是不断写入的记录。分割的结构化日志可以进行丰富的查询和聚合。 故障和日志刷新之间有一定的延迟。对于不是时间敏感的分析，可以使用批处理系统处理这些日志，或者使用临时的查询，或者使用UI 进行可视化。比如cloud dataflow处理日志，big query查询、data studio可视化 指标提供的粒度和信息相对较少，但是实时性很高。但是也有例外，比如高基数的指标。 告警和UI可视化一般都使用指标做数据来源。因为指标的实时性，可以快速地发现问题。但是排查问题原因，可能需要使用日志。 一般使用日志处理系统生成详细地报告，但是要时间不敏感。 使用指标进行告警。在排查问题时发现异常，添加告警的指标。 HTTP错误码如果在日志中，指标显示了一个全局的错误率，在发生异常时，需要从日志中一行行读取错误码。这样不合理。建议将错误码作为标签给指标。但是不要产生太大基数的指标。 对于不收敛的数据放到指标中是不合理的做法。但是如果使用日志进行临时查询，也增加了事件恢复的时间。因此，可以考虑使用一个脚本执行一次性的日志查询，在告警中暴露这个脚本复制执行，提高效率。 管理监控系统 集中式的监控系统可以提供一致性。但是，不同的团队也可能希望可以配置。 Google的实践是服务集中运行，单个框架。单个框架可以提高工作效率，提供集中的仪表盘，可以方便夸团队沟通协作。 如果所有的服务都导出了一致的基本指标集，可以为整个组织自动收集并提供一致的仪表盘。这样新启动的组建都具有基本的监控。 随着业务发展，生产系统也会发展，建议将监控系统的组建保持松散耦合。每个组建可以配置，但是有稳定的监控数据接口。各个组件负责收集、存储、告警、可视化，稳定的接口进行数据传递以及多系统兼容。 单系统为Zabbix，功能拆分的单组建模式正在流行。包括prometheus、influxDB、alertManager和grafana 目的指标 在错误预算受到威胁时，使用SLI指标进行监控和告警。SLI指标是基于SLO的告警触发时要检查的第一个指标 诊断SLO的告警时，需要知道是什么引发这些问题，从发现问题到诊断问题。 预期变化 如果是服务更新导致的，可以看软件版本、命令行标志、动态配置的版本 要判断故障和服务更新是不是相关的，最好能显示在仪表盘上，而不是cicd等系统日志 依赖服务 服务没有更新，可能是依赖的服务出现了问题，需要监控依赖的服务。 需要监控依赖服务的请求和响应，包括等待时间、错误码等，一般使用延迟、流量、错误和吞吐量等四个黄金指标。可以使用标签，对错误码、方法名称、服务名进行分类 一般建议从依赖的客户端底层进行监控，方便进行扩展。 如果依赖的服务API使用相同的命令，具体的方法名作为参数传递的，这样会导致监控不透明。比较方法是自行适应，或者要其他人重写api 容量 监控所依赖的每种资源的使用情况。这些资源不能超过限制。比如：内存RAM、磁盘、CPU。还有其他的资源，比如打开的文件描述符、线程池的活跃线程数、队列的等待时间、写日志的数量。 对于不同的语言，还有其他资源需要监控 java：堆、元空间 Go：goroutine的数量 除了对重大事件进行告警外，对于资源耗尽也需要告警，比如资源有硬性限制、超过阈值后性能下降等 对于这些资源都需要监控，这些对于容量和资源规划很重要 服务流量 按照状态码戏份服务的流量 对于HTTP请求，监控所有的错误码。 如果对请求限流，也要监控因为限流而被拒绝的数量 有目的的指标 每个指标的设计都应该达到一定的目标。 理想情况，指标仅仅在系统发生异常时，才产生重大变化，在系统正常时不会变化。在告警触发时能够快速诊断问题。 测试告警 监控和告警的代码都要遵守开发标准，严格测试。 可以考虑创建模拟的时序数据，使用他们测试告警的触发情况，标签的正常表现。 监控和告警的测试是多阶段的过程，需要多个系列的单元测试 生成的指标在特定条件是否按预期变化 监控是否按预期告警 告警是否路由到特定的地方 如果无法构建告警，可以考虑到处正在运行系统的指标，然后验证。 告警可能很长时间不会触发，但是要保证当指标超过特定阈值时，他们能发出有意义的通知。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-06-19T13:56:00+00:00">
+    <meta property="article:modified_time" content="2025-06-19T13:56:00+00:00">
+
+
+    
+    
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="SRE 书籍阅读笔记-告警">
+  <meta name="twitter:description" content="监控 监控的数据：指标、文本日志、切割日志、链路追踪、事件自省 基本：指标、切割日志 监控的目的：判断服务运行状况、诊断问题 提醒注意 调查诊断 现实系统信息 资源、服务运行状况，进行长期规划 服务更新前后的变化 如何选择监控系统 选择监控需要注意，优先考虑自己所需要的功能，主要包括：速度、计算能力、UI、告警 速度 监控数据应该是实时的，这样在出现问题时能够及时发现。另外，如果数据刷新缓慢，可能导致对系统做了操作，但是指标很久没有变化，导致错误判断。 查询大量数据，数据的检索速度很重要；是用图形绘制图像，也需要加载数据； 为了加快速度，可以传入和存储时许数据；也可以预计算常见的查询结果 计算能力 可能需要保留多个月的数据，分析增长等长期趋势，保留汇总的摘要数据就够了 详细的个人数据用来单独研究，存储成本较高、检索不方便 事件、资源消耗，使用单调递增的计数器。使用计数器可以计算一个时间窗口内的增长率等数据，也可以构建 SLO 告警 统计功能很重要。比如通过百分位延迟数据，可以发现长尾问题。算数平均数时无法得到这些结论的，可能掩盖了不良结果。 还需要具有脱机分析能力。比如每周、每月的报告，或者更复杂的计算。 UI能力 需要能够使用图表简单直观地显示时序数据。 需要选择合适的图形展示数据格式，常见的包括热图、直方图、对数比例图等。 对于不同的受众，使用不同的仪表盘。 对于每组仪表盘，使用相同类型的数据，便于沟通。 可能需要不同指标聚合的图形，比如计算机类型、服务器版本、请求类型等。对不同的指标进行数据切片，寻找数据的相关性和数据模式。 告警 告警需要分类，比如通过告警级别分类。不同的告警级别对应不同的响应方式。可以提交工单持续调查，也有的必须立即介入处理。
+使用告警抑制功能进行告警降噪，避免影响on call人员的注意力。比如
+所有的节点都报错，仅仅针对全局错误率进行告警，而不是每个节点一条。 依赖服务触发了告警，则不要出发服务本身成功率的告警。 还需要在问题解决后，告警不再被抑制。
+现在有大量的开源告警系统。
+监控数据的来源 常见两种监控数据：日志和指标，还有分布式追踪和运行时自省？ 指标表示属性和事件，通常是以固定的时间间隔收集的多个数据点。 日志是不断写入的记录。分割的结构化日志可以进行丰富的查询和聚合。 故障和日志刷新之间有一定的延迟。对于不是时间敏感的分析，可以使用批处理系统处理这些日志，或者使用临时的查询，或者使用UI 进行可视化。比如cloud dataflow处理日志，big query查询、data studio可视化 指标提供的粒度和信息相对较少，但是实时性很高。但是也有例外，比如高基数的指标。 告警和UI可视化一般都使用指标做数据来源。因为指标的实时性，可以快速地发现问题。但是排查问题原因，可能需要使用日志。 一般使用日志处理系统生成详细地报告，但是要时间不敏感。 使用指标进行告警。在排查问题时发现异常，添加告警的指标。 HTTP错误码如果在日志中，指标显示了一个全局的错误率，在发生异常时，需要从日志中一行行读取错误码。这样不合理。建议将错误码作为标签给指标。但是不要产生太大基数的指标。 对于不收敛的数据放到指标中是不合理的做法。但是如果使用日志进行临时查询，也增加了事件恢复的时间。因此，可以考虑使用一个脚本执行一次性的日志查询，在告警中暴露这个脚本复制执行，提高效率。 管理监控系统 集中式的监控系统可以提供一致性。但是，不同的团队也可能希望可以配置。 Google的实践是服务集中运行，单个框架。单个框架可以提高工作效率，提供集中的仪表盘，可以方便夸团队沟通协作。 如果所有的服务都导出了一致的基本指标集，可以为整个组织自动收集并提供一致的仪表盘。这样新启动的组建都具有基本的监控。 随着业务发展，生产系统也会发展，建议将监控系统的组建保持松散耦合。每个组建可以配置，但是有稳定的监控数据接口。各个组件负责收集、存储、告警、可视化，稳定的接口进行数据传递以及多系统兼容。 单系统为Zabbix，功能拆分的单组建模式正在流行。包括prometheus、influxDB、alertManager和grafana 目的指标 在错误预算受到威胁时，使用SLI指标进行监控和告警。SLI指标是基于SLO的告警触发时要检查的第一个指标 诊断SLO的告警时，需要知道是什么引发这些问题，从发现问题到诊断问题。 预期变化 如果是服务更新导致的，可以看软件版本、命令行标志、动态配置的版本 要判断故障和服务更新是不是相关的，最好能显示在仪表盘上，而不是cicd等系统日志 依赖服务 服务没有更新，可能是依赖的服务出现了问题，需要监控依赖的服务。 需要监控依赖服务的请求和响应，包括等待时间、错误码等，一般使用延迟、流量、错误和吞吐量等四个黄金指标。可以使用标签，对错误码、方法名称、服务名进行分类 一般建议从依赖的客户端底层进行监控，方便进行扩展。 如果依赖的服务API使用相同的命令，具体的方法名作为参数传递的，这样会导致监控不透明。比较方法是自行适应，或者要其他人重写api 容量 监控所依赖的每种资源的使用情况。这些资源不能超过限制。比如：内存RAM、磁盘、CPU。还有其他的资源，比如打开的文件描述符、线程池的活跃线程数、队列的等待时间、写日志的数量。 对于不同的语言，还有其他资源需要监控 java：堆、元空间 Go：goroutine的数量 除了对重大事件进行告警外，对于资源耗尽也需要告警，比如资源有硬性限制、超过阈值后性能下降等 对于这些资源都需要监控，这些对于容量和资源规划很重要 服务流量 按照状态码戏份服务的流量 对于HTTP请求，监控所有的错误码。 如果对请求限流，也要监控因为限流而被拒绝的数量 有目的的指标 每个指标的设计都应该达到一定的目标。 理想情况，指标仅仅在系统发生异常时，才产生重大变化，在系统正常时不会变化。在告警触发时能够快速诊断问题。 测试告警 监控和告警的代码都要遵守开发标准，严格测试。 可以考虑创建模拟的时序数据，使用他们测试告警的触发情况，标签的正常表现。 监控和告警的测试是多阶段的过程，需要多个系列的单元测试 生成的指标在特定条件是否按预期变化 监控是否按预期告警 告警是否路由到特定的地方 如果无法构建告警，可以考虑到处正在运行系统的指标，然后验证。 告警可能很长时间不会触发，但是要保证当指标超过特定阈值时，他们能发出有意义的通知。">
+
+
+    
+
+    <link rel="canonical" href="http://localhost:1313/posts/02srebookalert/">
+    <link href="/style.min.2d921c18cf1ec555ffc03d59a8adc211c402c68c930c27d6a0c306ab175a8d09.css" rel="stylesheet">
+    <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+
+<link rel="manifest" href="http://localhost:1313/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#434648">
+
+    
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+
+    
+    
+</head>
+<body data-theme = "auto" class="notransition">
+
+<script src="/js/theme.js"></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <a href="http://localhost:1313/" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+stroke-linejoin="round" class="feather feather-home">
+<title>首页</title>
+<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+        </a>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li>
+                    <a class="menu-link " href="/">
+                        首页
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link active" href="/posts/">
+                        文章
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/about/">
+                        关于
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+                
+                
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">SRE 书籍阅读笔记-告警</h1>
+                
+                
+                
+                <div class="post-meta">
+                    <time datetime="2025-06-19T13:56:00&#43;00:00" itemprop="datePublished"> 2025年06月19日 </time>
+                </div>
+                
+            </header>
+            
+    
+    <details class="toc" ZgotmplZ>
+        <summary><b>目录</b></summary>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#如何选择监控系统">如何选择监控系统</a>
+      <ul>
+        <li><a href="#速度">速度</a></li>
+        <li><a href="#计算能力">计算能力</a></li>
+        <li><a href="#ui能力">UI能力</a></li>
+        <li><a href="#告警">告警</a></li>
+      </ul>
+    </li>
+    <li><a href="#监控数据的来源">监控数据的来源</a></li>
+    <li><a href="#管理监控系统">管理监控系统</a></li>
+    <li><a href="#目的指标">目的指标</a>
+      <ul>
+        <li><a href="#预期变化">预期变化</a></li>
+        <li><a href="#依赖服务">依赖服务</a></li>
+        <li><a href="#容量">容量</a></li>
+        <li><a href="#服务流量">服务流量</a></li>
+        <li><a href="#有目的的指标">有目的的指标</a></li>
+        <li><a href="#测试告警">测试告警</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </details>
+            <div class="page-content">
+                <h1 id="监控">监控</h1>
+<ul>
+<li>监控的数据：指标、文本日志、切割日志、链路追踪、事件自省</li>
+<li>基本：指标、切割日志</li>
+<li>监控的目的：判断服务运行状况、诊断问题
+<ul>
+<li>提醒注意</li>
+<li>调查诊断</li>
+<li>现实系统信息</li>
+<li>资源、服务运行状况，进行长期规划</li>
+<li>服务更新前后的变化</li>
+</ul>
+</li>
+</ul>
+<h2 id="如何选择监控系统">如何选择监控系统</h2>
+<ul>
+<li>选择监控需要注意，优先考虑自己所需要的功能，主要包括：速度、计算能力、UI、告警</li>
+</ul>
+<h3 id="速度">速度</h3>
+<ul>
+<li>监控数据应该是实时的，这样在出现问题时能够及时发现。另外，如果数据刷新缓慢，可能导致对系统做了操作，但是指标很久没有变化，导致错误判断。</li>
+<li>查询大量数据，数据的检索速度很重要；是用图形绘制图像，也需要加载数据；</li>
+<li>为了加快速度，可以传入和存储时许数据；也可以预计算常见的查询结果</li>
+</ul>
+<h3 id="计算能力">计算能力</h3>
+<ul>
+<li>可能需要保留多个月的数据，分析增长等长期趋势，保留汇总的摘要数据就够了</li>
+<li>详细的个人数据用来单独研究，存储成本较高、检索不方便</li>
+<li>事件、资源消耗，使用单调递增的计数器。使用计数器可以计算一个时间窗口内的增长率等数据，也可以构建 SLO 告警</li>
+<li>统计功能很重要。比如通过百分位延迟数据，可以发现长尾问题。算数平均数时无法得到这些结论的，可能掩盖了不良结果。</li>
+<li>还需要具有脱机分析能力。比如每周、每月的报告，或者更复杂的计算。</li>
+</ul>
+<h3 id="ui能力">UI能力</h3>
+<ul>
+<li>需要能够使用图表简单直观地显示时序数据。</li>
+<li>需要选择合适的图形展示数据格式，常见的包括热图、直方图、对数比例图等。</li>
+<li>对于不同的受众，使用不同的仪表盘。</li>
+<li>对于每组仪表盘，使用相同类型的数据，便于沟通。</li>
+<li>可能需要不同指标聚合的图形，比如计算机类型、服务器版本、请求类型等。对不同的指标进行数据切片，寻找数据的相关性和数据模式。</li>
+</ul>
+<h3 id="告警">告警</h3>
+<ul>
+<li>
+<p>告警需要分类，比如通过告警级别分类。不同的告警级别对应不同的响应方式。可以提交工单持续调查，也有的必须立即介入处理。</p>
+</li>
+<li>
+<p>使用告警抑制功能进行告警降噪，避免影响on call人员的注意力。比如</p>
+<ul>
+<li>所有的节点都报错，仅仅针对全局错误率进行告警，而不是每个节点一条。</li>
+<li>依赖服务触发了告警，则不要出发服务本身成功率的告警。</li>
+</ul>
+</li>
+<li>
+<p>还需要在问题解决后，告警不再被抑制。</p>
+</li>
+<li>
+<p>现在有大量的开源告警系统。</p>
+</li>
+</ul>
+<h2 id="监控数据的来源">监控数据的来源</h2>
+<ul>
+<li>常见两种监控数据：日志和指标，还有分布式追踪和运行时自省？</li>
+<li>指标表示属性和事件，通常是以固定的时间间隔收集的多个数据点。</li>
+<li>日志是不断写入的记录。分割的结构化日志可以进行丰富的查询和聚合。</li>
+<li>故障和日志刷新之间有一定的延迟。对于不是时间敏感的分析，可以使用批处理系统处理这些日志，或者使用临时的查询，或者使用UI 进行可视化。比如cloud dataflow处理日志，big query查询、data studio可视化</li>
+<li>指标提供的粒度和信息相对较少，但是实时性很高。但是也有例外，比如高基数的指标。</li>
+<li>告警和UI可视化一般都使用指标做数据来源。因为指标的实时性，可以快速地发现问题。但是排查问题原因，可能需要使用日志。</li>
+<li>一般使用日志处理系统生成详细地报告，但是要时间不敏感。</li>
+<li>使用指标进行告警。在排查问题时发现异常，添加告警的指标。</li>
+<li>HTTP错误码如果在日志中，指标显示了一个全局的错误率，在发生异常时，需要从日志中一行行读取错误码。这样不合理。建议将错误码作为标签给指标。但是不要产生太大基数的指标。</li>
+<li>对于不收敛的数据放到指标中是不合理的做法。但是如果使用日志进行临时查询，也增加了事件恢复的时间。因此，可以考虑使用一个脚本执行一次性的日志查询，在告警中暴露这个脚本复制执行，提高效率。</li>
+</ul>
+<h2 id="管理监控系统">管理监控系统</h2>
+<ul>
+<li>集中式的监控系统可以提供一致性。但是，不同的团队也可能希望可以配置。</li>
+<li>Google的实践是服务集中运行，单个框架。单个框架可以提高工作效率，提供集中的仪表盘，可以方便夸团队沟通协作。</li>
+<li>如果所有的服务都导出了一致的基本指标集，可以为整个组织自动收集并提供一致的仪表盘。这样新启动的组建都具有基本的监控。</li>
+<li>随着业务发展，生产系统也会发展，建议将监控系统的组建保持松散耦合。每个组建可以配置，但是有稳定的监控数据接口。各个组件负责收集、存储、告警、可视化，稳定的接口进行数据传递以及多系统兼容。</li>
+<li>单系统为Zabbix，功能拆分的单组建模式正在流行。包括prometheus、influxDB、alertManager和grafana</li>
+</ul>
+<h2 id="目的指标">目的指标</h2>
+<ul>
+<li>在错误预算受到威胁时，使用SLI指标进行监控和告警。SLI指标是基于SLO的告警触发时要检查的第一个指标</li>
+<li>诊断SLO的告警时，需要知道是什么引发这些问题，从发现问题到诊断问题。</li>
+</ul>
+<h3 id="预期变化">预期变化</h3>
+<ul>
+<li>如果是服务更新导致的，可以看软件版本、命令行标志、动态配置的版本</li>
+<li>要判断故障和服务更新是不是相关的，最好能显示在仪表盘上，而不是cicd等系统日志</li>
+</ul>
+<h3 id="依赖服务">依赖服务</h3>
+<ul>
+<li>服务没有更新，可能是依赖的服务出现了问题，需要监控依赖的服务。</li>
+<li>需要监控依赖服务的请求和响应，包括等待时间、错误码等，一般使用延迟、流量、错误和吞吐量等四个黄金指标。可以使用标签，对错误码、方法名称、服务名进行分类</li>
+<li>一般建议从依赖的客户端底层进行监控，方便进行扩展。</li>
+<li>如果依赖的服务API使用相同的命令，具体的方法名作为参数传递的，这样会导致监控不透明。比较方法是自行适应，或者要其他人重写api</li>
+</ul>
+<h3 id="容量">容量</h3>
+<ul>
+<li>监控所依赖的每种资源的使用情况。这些资源不能超过限制。比如：内存RAM、磁盘、CPU。还有其他的资源，比如打开的文件描述符、线程池的活跃线程数、队列的等待时间、写日志的数量。</li>
+<li>对于不同的语言，还有其他资源需要监控
+<ul>
+<li>java：堆、元空间</li>
+<li>Go：goroutine的数量</li>
+</ul>
+</li>
+<li>除了对重大事件进行告警外，对于资源耗尽也需要告警，比如资源有硬性限制、超过阈值后性能下降等</li>
+<li>对于这些资源都需要监控，这些对于容量和资源规划很重要</li>
+</ul>
+<h3 id="服务流量">服务流量</h3>
+<ul>
+<li>按照状态码戏份服务的流量
+<ul>
+<li>对于HTTP请求，监控所有的错误码。</li>
+<li>如果对请求限流，也要监控因为限流而被拒绝的数量</li>
+</ul>
+</li>
+</ul>
+<h3 id="有目的的指标">有目的的指标</h3>
+<ul>
+<li>每个指标的设计都应该达到一定的目标。</li>
+<li>理想情况，指标仅仅在系统发生异常时，才产生重大变化，在系统正常时不会变化。在告警触发时能够快速诊断问题。</li>
+</ul>
+<h3 id="测试告警">测试告警</h3>
+<ul>
+<li>监控和告警的代码都要遵守开发标准，严格测试。</li>
+<li>可以考虑创建模拟的时序数据，使用他们测试告警的触发情况，标签的正常表现。</li>
+<li>监控和告警的测试是多阶段的过程，需要多个系列的单元测试
+<ul>
+<li>生成的指标在特定条件是否按预期变化</li>
+<li>监控是否按预期告警</li>
+<li>告警是否路由到特定的地方</li>
+</ul>
+</li>
+<li>如果无法构建告警，可以考虑到处正在运行系统的指标，然后验证。</li>
+<li>告警可能很长时间不会触发，但是要保证当指标超过特定阈值时，他们能发出有意义的通知。</li>
+</ul>
+
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <div class="footer_social-icons">
+<a href="https://github.com/arthur-x-wang" target="_blank" rel="noopener noreferrer me"
+    title="Github">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+    </path>
+</svg>
+</a>
+<a href="https://twitter.com" target="_blank" rel="noopener noreferrer me"
+    title="Twitter">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+    </path>
+</svg>
+</a>
+<a href="/index.xml" target="_blank" rel="noopener noreferrer me"
+    title="Rss">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 11a9 9 0 0 1 9 9" />
+    <path d="M4 4a16 16 0 0 1 16 16" />
+    <circle cx="5" cy="19" r="1" />
+</svg>
+</a>
+</div>
+    <small class="footer_copyright">
+        © 2025 Arthur Wang.
+        Powered by <a href="https://github.com/hugo-sid/hugo-blog-awesome" target="_blank" rel="noopener">Hugo blog awesome</a>.
+    </small>
+</footer><a href="#" title="回到顶部" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+    
+    
+        
+    
+
+    
+    
+        
+    
+
+
+
+    
+    <script async src="http://localhost:1313/js/main.js" ></script>
+
+    
+
+</body>
+</html>

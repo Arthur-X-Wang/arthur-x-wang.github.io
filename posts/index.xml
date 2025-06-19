@@ -2,17 +2,164 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Arthur Wang blog</title>
-    <link>https://arthur-x-wang.github.io/posts/</link>
+    <link>http://localhost:1313/posts/</link>
     <description>Recent content in Posts on Arthur Wang blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 26 May 2025 12:00:30 +0000</lastBuildDate><atom:link href="https://arthur-x-wang.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 19 Jun 2025 13:56:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SRE 书籍阅读笔记-告警</title>
+      <link>http://localhost:1313/posts/02srebookalert/</link>
+      <pubDate>Thu, 19 Jun 2025 13:56:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/02srebookalert/</guid>
+      
+      <description>&lt;h1 id=&#34;监控&#34;&gt;监控&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;监控的数据：指标、文本日志、切割日志、链路追踪、事件自省&lt;/li&gt;
+&lt;li&gt;基本：指标、切割日志&lt;/li&gt;
+&lt;li&gt;监控的目的：判断服务运行状况、诊断问题
+&lt;ul&gt;
+&lt;li&gt;提醒注意&lt;/li&gt;
+&lt;li&gt;调查诊断&lt;/li&gt;
+&lt;li&gt;现实系统信息&lt;/li&gt;
+&lt;li&gt;资源、服务运行状况，进行长期规划&lt;/li&gt;
+&lt;li&gt;服务更新前后的变化&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;如何选择监控系统&#34;&gt;如何选择监控系统&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;选择监控需要注意，优先考虑自己所需要的功能，主要包括：速度、计算能力、UI、告警&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;速度&#34;&gt;速度&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;监控数据应该是实时的，这样在出现问题时能够及时发现。另外，如果数据刷新缓慢，可能导致对系统做了操作，但是指标很久没有变化，导致错误判断。&lt;/li&gt;
+&lt;li&gt;查询大量数据，数据的检索速度很重要；是用图形绘制图像，也需要加载数据；&lt;/li&gt;
+&lt;li&gt;为了加快速度，可以传入和存储时许数据；也可以预计算常见的查询结果&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;计算能力&#34;&gt;计算能力&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;可能需要保留多个月的数据，分析增长等长期趋势，保留汇总的摘要数据就够了&lt;/li&gt;
+&lt;li&gt;详细的个人数据用来单独研究，存储成本较高、检索不方便&lt;/li&gt;
+&lt;li&gt;事件、资源消耗，使用单调递增的计数器。使用计数器可以计算一个时间窗口内的增长率等数据，也可以构建 SLO 告警&lt;/li&gt;
+&lt;li&gt;统计功能很重要。比如通过百分位延迟数据，可以发现长尾问题。算数平均数时无法得到这些结论的，可能掩盖了不良结果。&lt;/li&gt;
+&lt;li&gt;还需要具有脱机分析能力。比如每周、每月的报告，或者更复杂的计算。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;ui能力&#34;&gt;UI能力&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;需要能够使用图表简单直观地显示时序数据。&lt;/li&gt;
+&lt;li&gt;需要选择合适的图形展示数据格式，常见的包括热图、直方图、对数比例图等。&lt;/li&gt;
+&lt;li&gt;对于不同的受众，使用不同的仪表盘。&lt;/li&gt;
+&lt;li&gt;对于每组仪表盘，使用相同类型的数据，便于沟通。&lt;/li&gt;
+&lt;li&gt;可能需要不同指标聚合的图形，比如计算机类型、服务器版本、请求类型等。对不同的指标进行数据切片，寻找数据的相关性和数据模式。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;告警&#34;&gt;告警&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;告警需要分类，比如通过告警级别分类。不同的告警级别对应不同的响应方式。可以提交工单持续调查，也有的必须立即介入处理。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;使用告警抑制功能进行告警降噪，避免影响on call人员的注意力。比如&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;所有的节点都报错，仅仅针对全局错误率进行告警，而不是每个节点一条。&lt;/li&gt;
+&lt;li&gt;依赖服务触发了告警，则不要出发服务本身成功率的告警。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;还需要在问题解决后，告警不再被抑制。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;现在有大量的开源告警系统。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;监控数据的来源&#34;&gt;监控数据的来源&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;常见两种监控数据：日志和指标，还有分布式追踪和运行时自省？&lt;/li&gt;
+&lt;li&gt;指标表示属性和事件，通常是以固定的时间间隔收集的多个数据点。&lt;/li&gt;
+&lt;li&gt;日志是不断写入的记录。分割的结构化日志可以进行丰富的查询和聚合。&lt;/li&gt;
+&lt;li&gt;故障和日志刷新之间有一定的延迟。对于不是时间敏感的分析，可以使用批处理系统处理这些日志，或者使用临时的查询，或者使用UI 进行可视化。比如cloud dataflow处理日志，big query查询、data studio可视化&lt;/li&gt;
+&lt;li&gt;指标提供的粒度和信息相对较少，但是实时性很高。但是也有例外，比如高基数的指标。&lt;/li&gt;
+&lt;li&gt;告警和UI可视化一般都使用指标做数据来源。因为指标的实时性，可以快速地发现问题。但是排查问题原因，可能需要使用日志。&lt;/li&gt;
+&lt;li&gt;一般使用日志处理系统生成详细地报告，但是要时间不敏感。&lt;/li&gt;
+&lt;li&gt;使用指标进行告警。在排查问题时发现异常，添加告警的指标。&lt;/li&gt;
+&lt;li&gt;HTTP错误码如果在日志中，指标显示了一个全局的错误率，在发生异常时，需要从日志中一行行读取错误码。这样不合理。建议将错误码作为标签给指标。但是不要产生太大基数的指标。&lt;/li&gt;
+&lt;li&gt;对于不收敛的数据放到指标中是不合理的做法。但是如果使用日志进行临时查询，也增加了事件恢复的时间。因此，可以考虑使用一个脚本执行一次性的日志查询，在告警中暴露这个脚本复制执行，提高效率。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;管理监控系统&#34;&gt;管理监控系统&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;集中式的监控系统可以提供一致性。但是，不同的团队也可能希望可以配置。&lt;/li&gt;
+&lt;li&gt;Google的实践是服务集中运行，单个框架。单个框架可以提高工作效率，提供集中的仪表盘，可以方便夸团队沟通协作。&lt;/li&gt;
+&lt;li&gt;如果所有的服务都导出了一致的基本指标集，可以为整个组织自动收集并提供一致的仪表盘。这样新启动的组建都具有基本的监控。&lt;/li&gt;
+&lt;li&gt;随着业务发展，生产系统也会发展，建议将监控系统的组建保持松散耦合。每个组建可以配置，但是有稳定的监控数据接口。各个组件负责收集、存储、告警、可视化，稳定的接口进行数据传递以及多系统兼容。&lt;/li&gt;
+&lt;li&gt;单系统为Zabbix，功能拆分的单组建模式正在流行。包括prometheus、influxDB、alertManager和grafana&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;目的指标&#34;&gt;目的指标&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;在错误预算受到威胁时，使用SLI指标进行监控和告警。SLI指标是基于SLO的告警触发时要检查的第一个指标&lt;/li&gt;
+&lt;li&gt;诊断SLO的告警时，需要知道是什么引发这些问题，从发现问题到诊断问题。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;预期变化&#34;&gt;预期变化&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;如果是服务更新导致的，可以看软件版本、命令行标志、动态配置的版本&lt;/li&gt;
+&lt;li&gt;要判断故障和服务更新是不是相关的，最好能显示在仪表盘上，而不是cicd等系统日志&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;依赖服务&#34;&gt;依赖服务&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;服务没有更新，可能是依赖的服务出现了问题，需要监控依赖的服务。&lt;/li&gt;
+&lt;li&gt;需要监控依赖服务的请求和响应，包括等待时间、错误码等，一般使用延迟、流量、错误和吞吐量等四个黄金指标。可以使用标签，对错误码、方法名称、服务名进行分类&lt;/li&gt;
+&lt;li&gt;一般建议从依赖的客户端底层进行监控，方便进行扩展。&lt;/li&gt;
+&lt;li&gt;如果依赖的服务API使用相同的命令，具体的方法名作为参数传递的，这样会导致监控不透明。比较方法是自行适应，或者要其他人重写api&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;容量&#34;&gt;容量&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;监控所依赖的每种资源的使用情况。这些资源不能超过限制。比如：内存RAM、磁盘、CPU。还有其他的资源，比如打开的文件描述符、线程池的活跃线程数、队列的等待时间、写日志的数量。&lt;/li&gt;
+&lt;li&gt;对于不同的语言，还有其他资源需要监控
+&lt;ul&gt;
+&lt;li&gt;java：堆、元空间&lt;/li&gt;
+&lt;li&gt;Go：goroutine的数量&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;除了对重大事件进行告警外，对于资源耗尽也需要告警，比如资源有硬性限制、超过阈值后性能下降等&lt;/li&gt;
+&lt;li&gt;对于这些资源都需要监控，这些对于容量和资源规划很重要&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;服务流量&#34;&gt;服务流量&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;按照状态码戏份服务的流量
+&lt;ul&gt;
+&lt;li&gt;对于HTTP请求，监控所有的错误码。&lt;/li&gt;
+&lt;li&gt;如果对请求限流，也要监控因为限流而被拒绝的数量&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;有目的的指标&#34;&gt;有目的的指标&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;每个指标的设计都应该达到一定的目标。&lt;/li&gt;
+&lt;li&gt;理想情况，指标仅仅在系统发生异常时，才产生重大变化，在系统正常时不会变化。在告警触发时能够快速诊断问题。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;测试告警&#34;&gt;测试告警&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;监控和告警的代码都要遵守开发标准，严格测试。&lt;/li&gt;
+&lt;li&gt;可以考虑创建模拟的时序数据，使用他们测试告警的触发情况，标签的正常表现。&lt;/li&gt;
+&lt;li&gt;监控和告警的测试是多阶段的过程，需要多个系列的单元测试
+&lt;ul&gt;
+&lt;li&gt;生成的指标在特定条件是否按预期变化&lt;/li&gt;
+&lt;li&gt;监控是否按预期告警&lt;/li&gt;
+&lt;li&gt;告警是否路由到特定的地方&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;如果无法构建告警，可以考虑到处正在运行系统的指标，然后验证。&lt;/li&gt;
+&lt;li&gt;告警可能很长时间不会触发，但是要保证当指标超过特定阈值时，他们能发出有意义的通知。&lt;/li&gt;
+&lt;/ul&gt;</description>
+      
+    </item>
+    
     <item>
       <title>如何通过vs code 连接 aws</title>
-      <link>https://arthur-x-wang.github.io/posts/01vscodeconnectaws/</link>
+      <link>http://localhost:1313/posts/01vscodeconnectaws/</link>
       <pubDate>Mon, 26 May 2025 12:00:30 +0000</pubDate>
       
-      <guid>https://arthur-x-wang.github.io/posts/01vscodeconnectaws/</guid>
+      <guid>http://localhost:1313/posts/01vscodeconnectaws/</guid>
       
       <description>&lt;h1 id=&#34;前提条件&#34;&gt;前提条件&lt;/h1&gt;
 &lt;ul&gt;
