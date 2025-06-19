@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cn"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<html lang="zh-cn"><head><meta charset="utf-8">
 <meta http-equiv="content-type" content="text/html">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -18,7 +18,7 @@
 <meta property="og:locale" content="zh-cn" />
 <meta name="language" content="zh-cn" />
 
-  <link rel="alternate" hreflang="zh-cn" href="http://localhost:1313/posts/02srebookalert/" title="Chinese" />
+  <link rel="alternate" hreflang="zh-cn" href="https://arthur-x-wang.github.io/posts/02srebookalert/" title="Chinese" />
 
 
 
@@ -31,7 +31,7 @@
     <meta property="og:type" content="article" />
     <meta property="og:article:published_time" content=2025-06-19T13:56:00Z />
     <meta property="article:published_time" content=2025-06-19T13:56:00Z />
-    <meta property="og:url" content="http://localhost:1313/posts/02srebookalert/" />
+    <meta property="og:url" content="https://arthur-x-wang.github.io/posts/02srebookalert/" />
 
     
     <meta property="og:article:author" content="Arthur Wang" />
@@ -71,7 +71,7 @@
 <meta name="generator" content="Hugo 0.147.5">
 
     
-    <meta property="og:url" content="http://localhost:1313/posts/02srebookalert/">
+    <meta property="og:url" content="https://arthur-x-wang.github.io/posts/02srebookalert/">
   <meta property="og:site_name" content="Arthur Wang blog">
   <meta property="og:title" content="SRE 书籍阅读笔记-告警">
   <meta property="og:description" content="监控 监控的数据：指标、文本日志、切割日志、链路追踪、事件自省 基本：指标、切割日志 监控的目的：判断服务运行状况、诊断问题 提醒注意 调查诊断 现实系统信息 资源、服务运行状况，进行长期规划 服务更新前后的变化 如何选择监控系统 选择监控需要注意，优先考虑自己所需要的功能，主要包括：速度、计算能力、UI、告警 速度 监控数据应该是实时的，这样在出现问题时能够及时发现。另外，如果数据刷新缓慢，可能导致对系统做了操作，但是指标很久没有变化，导致错误判断。 查询大量数据，数据的检索速度很重要；是用图形绘制图像，也需要加载数据； 为了加快速度，可以传入和存储时许数据；也可以预计算常见的查询结果 计算能力 可能需要保留多个月的数据，分析增长等长期趋势，保留汇总的摘要数据就够了 详细的个人数据用来单独研究，存储成本较高、检索不方便 事件、资源消耗，使用单调递增的计数器。使用计数器可以计算一个时间窗口内的增长率等数据，也可以构建 SLO 告警 统计功能很重要。比如通过百分位延迟数据，可以发现长尾问题。算数平均数时无法得到这些结论的，可能掩盖了不良结果。 还需要具有脱机分析能力。比如每周、每月的报告，或者更复杂的计算。 UI能力 需要能够使用图表简单直观地显示时序数据。 需要选择合适的图形展示数据格式，常见的包括热图、直方图、对数比例图等。 对于不同的受众，使用不同的仪表盘。 对于每组仪表盘，使用相同类型的数据，便于沟通。 可能需要不同指标聚合的图形，比如计算机类型、服务器版本、请求类型等。对不同的指标进行数据切片，寻找数据的相关性和数据模式。 告警 告警需要分类，比如通过告警级别分类。不同的告警级别对应不同的响应方式。可以提交工单持续调查，也有的必须立即介入处理。
@@ -99,7 +99,7 @@
 
     
 
-    <link rel="canonical" href="http://localhost:1313/posts/02srebookalert/">
+    <link rel="canonical" href="https://arthur-x-wang.github.io/posts/02srebookalert/">
     <link href="/style.min.2d921c18cf1ec555ffc03d59a8adc211c402c68c930c27d6a0c306ab175a8d09.css" rel="stylesheet">
     <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
 
@@ -113,7 +113,7 @@
 
 
 
-<link rel="manifest" href="http://localhost:1313/site.webmanifest">
+<link rel="manifest" href="https://arthur-x-wang.github.io/site.webmanifest">
 
 <meta name="msapplication-config" content="/browserconfig.xml">
 <meta name="msapplication-TileColor" content="#2d89ef">
@@ -124,14 +124,15 @@
 
     
     
+    
 </head>
 <body data-theme = "auto" class="notransition">
 
-<script src="/js/theme.js"></script>
+<script src="/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js" integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script>
 
 <div class="navbar" role="navigation">
     <nav class="menu" aria-label="Main Navigation">
-        <a href="http://localhost:1313/" class="logo">
+        <a href="https://arthur-x-wang.github.io/" class="logo">
             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
 stroke-linejoin="round" class="feather feather-home">
@@ -435,7 +436,7 @@ stroke-linejoin="round" class="feather feather-home">
 
 
     
-    <script async src="http://localhost:1313/js/main.js" ></script>
+    <script src="https://arthur-x-wang.github.io/js/main.min.35f435a5d8eac613c52daa28d8af544a4512337d3e95236e4a4978417b8dcb2f.js" integrity="sha256-NfQ1pdjqxhPFLaoo2K9USkUSM30&#43;lSNuSkl4QXuNyy8="></script>
 
     
 
