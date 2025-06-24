@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://arthur-x-wang.github.io/</loc>
-    <lastmod>2025-06-19T13:56:00+00:00</lastmod>
+    <lastmod>2025-06-24T13:28:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-gb"
@@ -46,7 +46,7 @@
                 />
   </url><url>
     <loc>https://arthur-x-wang.github.io/posts/</loc>
-    <lastmod>2025-06-19T13:56:00+00:00</lastmod>
+    <lastmod>2025-06-24T13:28:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-gb"
@@ -57,6 +57,9 @@
                 hreflang="zh-cn"
                 href="https://arthur-x-wang.github.io/posts/"
                 />
+  </url><url>
+    <loc>https://arthur-x-wang.github.io/posts/07srebooksimple/</loc>
+    <lastmod>2025-06-24T13:28:00+00:00</lastmod>
   </url><url>
     <loc>https://arthur-x-wang.github.io/posts/02srebookalert/</loc>
     <lastmod>2025-06-19T13:56:00+00:00</lastmod>
@@ -73,8 +76,6 @@
                 hreflang="zh-cn"
                 href="https://arthur-x-wang.github.io/posts/01vscodeconnectaws/"
                 />
-  </url><url>
-    <loc>https://arthur-x-wang.github.io/posts/07srebooksimple/</loc>
   </url><url>
     <loc>https://arthur-x-wang.github.io/categories/</loc>
     <xhtml:link
