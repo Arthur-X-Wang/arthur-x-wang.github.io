@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Arthur Wang blog</title>
+    <title>首页 on Arthur Wang blog</title>
     <link>https://arthur-x-wang.github.io/</link>
-    <description>Recent content on Arthur Wang blog</description>
+    <description>Recent content in 首页 on Arthur Wang blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Tue, 24 Jun 2025 13:28:00 +0000</lastBuildDate><atom:link href="https://arthur-x-wang.github.io/index.xml" rel="self" type="application/rss+xml" />
@@ -292,6 +292,30 @@
 &lt;ul&gt;
 &lt;li&gt;pem 文件需要修改权限， &lt;code&gt;chmod 400 ${pem}&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>关于</title>
+      <link>https://arthur-x-wang.github.io/pages/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://arthur-x-wang.github.io/pages/about/</guid>
+      
+      <description>&lt;h2 id=&#34;个人简介&#34;&gt;个人简介&lt;/h2&gt;
+&lt;p&gt;王兴（英文名 Arthur Wang）：程序员、业余摄影师、游泳爱好者。曾就职于 tp-link，就任云服务部 SRE 工程师。武汉大学校友。&lt;/p&gt;
+&lt;h2 id=&#34;联系方式&#34;&gt;联系方式&lt;/h2&gt;
+&lt;div style=&#34;display: grid; grid-template-columns: auto auto; gap: 8px;&#34;&gt;
+  &lt;div&gt;电话（仅短信）&lt;/div&gt; &lt;div&gt;+852-65705008 &lt;/div&gt;
+  &lt;div&gt;电子邮箱&lt;/div&gt; &lt;div&gt;arthur.xo.wang@gmail.com&lt;/div&gt;
+&lt;/div&gt;
+&lt;h2 id=&#34;链接&#34;&gt;链接&lt;/h2&gt;
+&lt;div style=&#34;display: grid; grid-template-columns: auto auto; gap: 8px;&#34;&gt;
+  &lt;div&gt;GitHub&lt;/div&gt; 
+  &lt;div&gt;&lt;a href=&#34;https://github.com/Arthur-X-Wang&#34;&gt;Arthur-X-Wang&lt;/a&gt;&lt;/div&gt;
+  &lt;div&gt;Twitter&lt;/div&gt; 
+  &lt;div&gt;&lt;a href=&#34;https://twitter.com/wangxing&#34;&gt;@Unrecheable&lt;/a&gt;&lt;/div&gt;
+&lt;/div&gt;</description>
       
     </item>
     

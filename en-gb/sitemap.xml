@@ -71,6 +71,18 @@
                 href="https://arthur-x-wang.github.io/en-gb/posts/"
                 />
   </url><url>
+    <loc>https://arthur-x-wang.github.io/en-gb/pages/about/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://arthur-x-wang.github.io/pages/about/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-gb"
+                href="https://arthur-x-wang.github.io/en-gb/pages/about/"
+                />
+  </url><url>
     <loc>https://arthur-x-wang.github.io/en-gb/categories/</loc>
     <xhtml:link
                 rel="alternate"
@@ -111,6 +123,18 @@
                 rel="alternate"
                 hreflang="en-gb"
                 href="https://arthur-x-wang.github.io/en-gb/categories/"
+                />
+  </url><url>
+    <loc>https://arthur-x-wang.github.io/en-gb/pages/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://arthur-x-wang.github.io/pages/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-gb"
+                href="https://arthur-x-wang.github.io/en-gb/pages/"
                 />
   </url><url>
     <loc>https://arthur-x-wang.github.io/en-gb/tags/</loc>

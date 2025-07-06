@@ -2,6 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://arthur-x-wang.github.io/posts/</loc>
+    <lastmod>2025-06-24T13:28:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-gb"
+                href="https://arthur-x-wang.github.io/en-gb/posts/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://arthur-x-wang.github.io/posts/"
+                />
+  </url><url>
+    <loc>https://arthur-x-wang.github.io/posts/07srebooksimple/</loc>
+    <lastmod>2025-06-24T13:28:00+00:00</lastmod>
+  </url><url>
     <loc>https://arthur-x-wang.github.io/</loc>
     <lastmod>2025-06-24T13:28:00+00:00</lastmod>
     <xhtml:link
@@ -44,22 +60,6 @@
                 hreflang="zh-cn"
                 href="https://arthur-x-wang.github.io/"
                 />
-  </url><url>
-    <loc>https://arthur-x-wang.github.io/posts/</loc>
-    <lastmod>2025-06-24T13:28:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-gb"
-                href="https://arthur-x-wang.github.io/en-gb/posts/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://arthur-x-wang.github.io/posts/"
-                />
-  </url><url>
-    <loc>https://arthur-x-wang.github.io/posts/07srebooksimple/</loc>
-    <lastmod>2025-06-24T13:28:00+00:00</lastmod>
   </url><url>
     <loc>https://arthur-x-wang.github.io/posts/02srebookalert/</loc>
     <lastmod>2025-06-19T13:56:00+00:00</lastmod>
@@ -119,6 +119,18 @@
                 href="https://arthur-x-wang.github.io/categories/"
                 />
   </url><url>
+    <loc>https://arthur-x-wang.github.io/pages/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-gb"
+                href="https://arthur-x-wang.github.io/en-gb/pages/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://arthur-x-wang.github.io/pages/"
+                />
+  </url><url>
     <loc>https://arthur-x-wang.github.io/tags/</loc>
     <xhtml:link
                 rel="alternate"
@@ -159,6 +171,18 @@
                 rel="alternate"
                 hreflang="zh-cn"
                 href="https://arthur-x-wang.github.io/tags/"
+                />
+  </url><url>
+    <loc>https://arthur-x-wang.github.io/pages/about/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-gb"
+                href="https://arthur-x-wang.github.io/en-gb/pages/about/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://arthur-x-wang.github.io/pages/about/"
                 />
   </url>
 </urlset>
